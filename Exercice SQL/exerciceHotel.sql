@@ -1,5 +1,6 @@
 -- Exercice requête SQL
 -- Lot 1
+
 -- 1.
 SELECT hot_nom, hot_ville FROM `hotel`; 
 -- 2.
@@ -12,6 +13,7 @@ SELECT cha_numero, cha_capacite FROM `chambre` WHERE cha_capacite > 1;
 SELECT cli_nom, cli_ville FROM `client` WHERE cli_ville != 'Londres'; 
 -- 6.
 SELECT hot_nom, hot_ville, hot_categorie FROM `hotel` WHERE hot_ville = 'Bretou' AND hot_categorie > 3; 
+
 -- Lot 2
 -- 7.
 SELECT sta_nom, hot_nom, hot_categorie, hot_ville FROM `hotel` INNER JOIN `station` ON hot_sta_id = sta_id; 
@@ -25,6 +27,7 @@ SELECT cli_nom, hot_nom, res_date FROM `client` JOIN `hotel` ON hotel.hot_id = c
 SELECT sta_nom, hot_nom, cha_numero, cha_capacite FROM `chambre` JOIN `hotel` ON hotel.hot_id = chambre.cha_id JOIN `station` ON station.sta_id = chambre.cha_id; 
 -- 12.
 SELECT cli_nom, hot_nom, DATEDIFF(res_date_fin, res_date_debut), res_date_debut, res_date_fin FROM `client` JOIN `hotel` ON hotel.hot_id = client.cli_id JOIN `reservation` ON reservation.res_id = client.cli_id;
+
 -- Lot 3
 -- 13.
 SELECT COUNT(hot_id), sta_nom FROM `hotel`  INNER JOIN `station` ON sta_id = hot_sta_id GROUP BY sta_nom;
@@ -33,5 +36,6 @@ SELECT COUNT(cha_id), sta_nom FROM `chambre`  INNER JOIN `station` ON sta_id = c
 -- 15.
 SELECT COUNT(cha_id), sta_nom FROM `chambre` INNER JOIN `station` ON sta_id = cha_hot_id WHERE cha_capacite > 1 GROUP BY sta_nom;
 -- 16.
-SELECT hot_nom FROM `hotel` JOIN `reservation` ON hot_id = res_id
-JOIN `client` ON cli_id = res_cli_id;
+SELECT hot_nom, cli_nom  FROM `client` JOIN `reservation` ON cli_id = res_cli_id
+INNER JOIN `chambre` ON cha_id = res_cha_id  
+INNER JOIN `hotel` ON hot_id = cha_hot_id WHERE cli_nom = 'Squire';
