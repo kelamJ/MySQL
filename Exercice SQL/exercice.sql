@@ -27,3 +27,11 @@ SELECT sta_nom, hot_nom, cha_numero, cha_capacite FROM `chambre` JOIN `hotel` ON
 SELECT cli_nom, hot_nom, DATEDIFF(res_date_fin, res_date_debut), res_date_debut, res_date_fin FROM `client` JOIN `hotel` ON hotel.hot_id = client.cli_id JOIN `reservation` ON reservation.res_id = client.cli_id;
 -- Lot 3
 -- 13.
+SELECT COUNT(hot_id), sta_nom FROM `hotel`  INNER JOIN `station` ON sta_id = hot_sta_id GROUP BY sta_nom;
+-- 14.
+SELECT COUNT(cha_id), sta_nom FROM `chambre`  INNER JOIN `station` ON sta_id = cha_hot_id GROUP BY sta_nom;
+-- 15.
+SELECT COUNT(cha_id), sta_nom FROM `chambre` INNER JOIN `station` ON sta_id = cha_hot_id WHERE cha_capacite > 1 GROUP BY sta_nom;
+-- 16.
+SELECT hot_nom FROM `hotel` JOIN `reservation` ON hot_id = res_id
+JOIN `client` ON cli_id = res_cli_id;
