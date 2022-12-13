@@ -11,7 +11,7 @@
     SELECT codart AS "n° produit", libart AS "libellé produit", stkphy AS "stock actuel", stkale AS "stock d'alerte", qteann AS "quantité anuelle" 
     FROM `produit` WHERE qteann < 1000 AND stkphy <= stkale;
 -- 5.
-    ELECT posfou, nomfou FROM `fournis`
+    SELECT posfou, nomfou FROM `fournis`
     WHERE posfou LIKE "75%"
     OR posfou LIKE "78%"
     OR posfou LIKE "92%"
@@ -23,5 +23,11 @@
     SELECT numcom AS "n° de commande", 
     datcom AS "date de commande" FROM `entcom`
     WHERE obscom <> "null";
-8.
+-- 8.
+    SELECT DISTINCT numcom, 
+    SUM(qtecde * priuni) AS "total de commande" 
+    FROM `ligcom`
+    GROUP BY numcom
+    ORDER BY SUM(qtecde * priuni) DESC;
+-- 9.
     
