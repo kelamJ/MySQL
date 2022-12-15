@@ -18,7 +18,8 @@
     OR posfou LIKE "77%"
     ORDER BY posfou DESC, nomfou ASC;
 -- 6.
-    SELECT datcom as "commande passées" FROM `entcom` WHERE datcom;
+    SELECT datcom as "commande passées" FROM `entcom`
+    WHERE datcom LIKE '____-03-__%' OR datcom LIKE '____-04-__%';
 -- 7.
     SELECT numcom AS "n° de commande", 
     datcom AS "date de commande" FROM `entcom`
@@ -73,9 +74,24 @@ V.2
     JOIN fournis ON fournis.numfou = vente.numfou
     WHERE stkphy <= (1.5 * stkale);
 -- 16.
-    SELECT nomfou  AS "produit", libart AS "fournisseur" FROM `produit`
+    SELECT nomfou  AS "fournisseur", libart AS "produit" FROM `produit`
     JOIN vente ON vente.codart = produit.codart
     JOIN fournis ON fournis.numfou = vente.numfou
     JOIN entcom ON entcom.numfou = fournis.numfou
     JOIN ligcom ON ligcom.numcom = entcom.numcom
-    WHERE stkphy <= (1.5 * stkale) AND DATEDIFF(derliv, datcom) < 30;
+    WHERE stkphy <= (1.5 * stkale) AND delliv <= 30;
+-- 17.
+    SELECT stkphy AS "stock totale", nomfou AS "nom fournisseur" 
+    FROM `produit` 
+    JOIN vente ON vente.codart = produit.codart
+    JOIN fournis ON fournis.numfou = vente.numfou
+    GROUP BY nomfou
+    ORDER BY stkphy DESC;
+-- 18.
+    SELECT libart AS "liste produit", qteliv AS "quantité commandé", qteann  FROM `ligcom` 
+    JOIN produit ON produit.codart = ligcom.codart
+    JOIN vente ON vente.codart = produit.codart
+    JOIN fournis ON fournis.numfou = vente.numfou
+    WHERE qteliv > (qteann * 0.9;
+-- 19.
+SELECT numfou, ((qtecde * priuni) * 0.2)  FROM entcom, ligcom WHERE entcom.numcom = ligcom.numcom GROUP BY numfou;
