@@ -34,7 +34,7 @@
     SELECT DISTINCT numcom, 
     SUM(qtecde * priuni) AS "total de commande" 
     FROM `ligcom`
-    WHERE qtecde <= 1000
+    WHERE qtecde <= 1000  AND SUM(qtecde * priuni) > 10000
     GROUP BY numcom;
 -- 10.
     SELECT nomfou AS "nom fournisseur", numcom AS "numéro de commande", datcom AS "date" 
@@ -94,4 +94,25 @@ V.2
     JOIN fournis ON fournis.numfou = vente.numfou
     WHERE qteliv > (qteann * 0.9;
 -- 19.
-SELECT numfou, ((qtecde * priuni) * 0.2)  FROM entcom, ligcom WHERE entcom.numcom = ligcom.numcom GROUP BY numfou;
+SELECT numfou, ((qtecde * priuni) * 1.2)  FROM entcom, ligcom WHERE entcom.numcom = ligcom.numcom GROUP BY numfou;
+
+-- Mise a jour de données cas papyrus
+-- 1.
+    UPDATE vente
+    SET
+    prix1 = prix1 * 1.04,
+    prix2 = prix2 *0.02
+    WHERE numfou = 9180
+-- 2.
+    UPDATE vente
+    SET
+    prix2 = prix1 
+    WHERE prix2 = 0
+3.
+    UPDATE entcom
+    JOIN fournis ON  fournis.numfou = entcom.numfou
+    SET obscom = '*****'
+    WHERE satisf < 5
+4.
+    DELETE FROM vente where codart 
+    in (select codart from produit WHERE (codart LIKE "I110%"));

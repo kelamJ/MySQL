@@ -39,6 +39,7 @@ SELECT COUNT(cha_id), sta_nom FROM `chambre` INNER JOIN `station` ON sta_id = ch
 SELECT hot_nom, cli_nom  FROM `client` JOIN `reservation` ON cli_id = res_cli_id
 INNER JOIN `chambre` ON cha_id = res_cha_id  
 INNER JOIN `hotel` ON hot_id = cha_hot_id WHERE cli_nom = 'Squire';
+
 -- 17.
 SELECT AVG(DATEDIFF( res_date_fin, res_date_debut )) AS "durée moy réservation", sta_nom  AS "nom station"
 FROM `reservation`
