@@ -114,5 +114,5 @@ SELECT numfou, ((qtecde * priuni) * 1.2)  FROM entcom, ligcom WHERE entcom.numco
     SET obscom = '*****'
     WHERE satisf < 5
 4.
-    DELETE FROM vente where codart 
-    in (select codart from produit WHERE (codart LIKE "I110%"));
+    DELETE FROM vente WHERE codart 
+    IN (SELECT codart FROM produit WHERE (codart LIKE "I110%"));
