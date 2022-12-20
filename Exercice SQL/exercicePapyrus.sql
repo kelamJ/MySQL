@@ -88,11 +88,11 @@ V.2
     GROUP BY nomfou
     ORDER BY stkphy DESC;
 -- 18.
-    SELECT libart AS "liste produit", qteliv AS "quantité commandé", qteann  FROM `ligcom` 
+SELECT libart AS "liste produit", qtecde AS "quantité commandé"  FROM `ligcom` 
     JOIN produit ON produit.codart = ligcom.codart
     JOIN vente ON vente.codart = produit.codart
     JOIN fournis ON fournis.numfou = vente.numfou
-    WHERE qteliv > (qteann * 0.9;
+    WHERE qtecde > (qteann * 0.9);
 -- 19.
 SELECT numfou, ((qtecde * priuni) * 1.2)  FROM entcom, ligcom WHERE entcom.numcom = ligcom.numcom GROUP BY numfou;
 
