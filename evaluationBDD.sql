@@ -42,4 +42,5 @@ SELECT MAX(OrderDate) FROM `orders`
 JOIN customers on customers.CustomerID = orders.CustomerID
 WHERE CompanyName = "Du monde entier";
 -- 10.
-test 
+SELECT round(avg(datediff(ShippedDate, OrderDate))) as "Délai moyen de livraison en jours"
+FROM `orders`;
